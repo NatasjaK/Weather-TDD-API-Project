@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import FavoriteCity from './FavoriteCity';
 import snowImage from '/snow.jpg';
 import coldImage from '/cold.jpg';
 import sunnyImage from '/sunny.jpg';
@@ -116,20 +117,39 @@ const WeatherComponent = () => {
     };
 
     const handleCityChange = (e) => {
-        setCityName(e.target.value);
+        setCityName(e.target.value); // Update the cityName state with the input value
     };
 
-    const handleSearch = () => {
-        fetchWeatherData();
+    const handleCitySelect = (selectedCity) => {
+        setCityName(selectedCity); // Update the cityName state with the selected city
+    };
+
+    const handleSearch = async () => {
+        try {
+            await fetchWeatherData();
+            setCityName(''); // Clear the input field after fetching data
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+            setWeatherData(null);
+            setErrorMessage('Error fetching data');
+        }
+    };
+
+    const handleFavoriteCitySelection = (selectedCity) => {
+        setCityName(selectedCity);
+        setCityName('');
     };
 
     useEffect(() => {
-        fetchWeatherData(cityName); // Fetch weather data when the component mounts
-    }, []); // Empty dependency array to trigger this effect only once
+        if (cityName) {
+            fetchWeatherData(cityName);
+        }
+    }, [cityName]);
 
     return (
        
         <div>
+            
             <WeatherContainer weatherData={weatherData}>
                 <img src={getImage(weatherData)} alt="Weather" style={{ width: 'oslopx', height: '200px' }} />
             <h1>Weather Information</h1>
@@ -152,7 +172,11 @@ const WeatherComponent = () => {
                     <p>Wind Speed: {weatherData.windSpeed} m/s</p>
                 </div>
             )}
-                </WeatherContainer>
+            </WeatherContainer>
+            <FavoriteCity
+                onFavoriteSave={handleFavoriteCitySelection}
+                onCitySelect={handleCitySelect} // Pass the callback function to handle city selection
+            />
             </div>
        
     );
