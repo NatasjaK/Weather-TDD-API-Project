@@ -13,6 +13,16 @@ namespace Weather_TDD_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("WeatherCorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:5173") 
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +40,8 @@ namespace Weather_TDD_API
                 Console.WriteLine($"API Call {_apiCallCount} made");
                 await next.Invoke();
             });
+
+            app.UseCors("WeatherCorsPolicy");
 
             app.MapGet("/statistics", async (HttpContext context) =>
             {
@@ -63,7 +75,10 @@ namespace Weather_TDD_API
 
                 using var client = new HttpClient();
                 var response = client.GetAsync($"{baseURL}{queryParams}").Result;
+                Console.WriteLine(response);
                 var content = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(content);
+
 
                 dynamic jsonData = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
 
@@ -81,7 +96,7 @@ namespace Weather_TDD_API
                     Humidity = humidity,
                     WindSpeed = windSpeed
                 };
-
+                 
                 return weatherData;
             }
 

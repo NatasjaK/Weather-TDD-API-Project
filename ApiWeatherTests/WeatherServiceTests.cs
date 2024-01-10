@@ -2,7 +2,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Weather_TDD_API;
 
-
 namespace ApiWeatherTests
 
 {
