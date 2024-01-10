@@ -52,6 +52,7 @@ const WeatherContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 
     h1 {
         font-size: 28px;
@@ -145,8 +146,8 @@ const WeatherComponent = () => {
             {errorMessage && <p>{errorMessage}</p>}
             {weatherData && !errorMessage && (
                 <div>
-                    <h2>{weatherData.cityName}</h2>
-                    <p>Temperature: {weatherData.temperature}°C</p>
+                        <h2>{weatherData.cityName}</h2>
+                        <p>Temperature: {weatherData && `${weatherData.temperature.toString()}\u00B0C`}</p>
                     <p>Humidity: {weatherData.humidity}%</p>
                     <p>Wind Speed: {weatherData.windSpeed} m/s</p>
                 </div>
