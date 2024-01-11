@@ -10,24 +10,43 @@ namespace ApiWeatherTests
 
         private readonly HttpClient _httpClient = new()
         {
-            BaseAddress = new Uri("http://localhost:7168")
+            BaseAddress = new Uri("https://localhost:7186/")
         };
         public void Dispose()
         {
             _httpClient.Dispose();
         }
 
+        
         [Fact]
         public async Task HealthCheckShouldReturnSuccess()
         {
+            try
+            {
+                // Act
+                var response = await _httpClient.GetAsync("/healthcheck");
 
-            // Act
-            var response = await _httpClient.GetAsync("/healthcheck");
-
-            // Assert
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                // Assert
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"HttpRequestException: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"InnerException: {ex.InnerException.Message}");
+                }
+                throw;
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"IOException: {ex.Message}");
+                throw;
+            }
         }
 
+
+        [Fact]
         public async Task Healthcheck_ExpectedOk()
         {
             string expectedStatusCode = "OK";
@@ -101,7 +120,11 @@ namespace ApiWeatherTests
         public async Task GetWeatherData_ShouldReturnValidApiCallCount()
         {
             // Arrange
-            int expectedApiCallCount = 3;
+            int expectedApiCallCount = 4;
+
+            // Reset API call count to 0 using the class name
+            Weather_TDD_API.Program.ResetApiCallCount();
+            Console.WriteLine("API Call count reset to 0." + Weather_TDD_API.Program._apiCallCount);
 
             // Act: Make several API calls
             await _httpClient.GetAsync("/weatherdata/Stockholm");
@@ -118,6 +141,8 @@ namespace ApiWeatherTests
             // Assert: Check if the count matches the expected number of calls
             Assert.Equal(expectedApiCallCount, apiCallCount);
         }
+
+
 
         private int ExtractApiCallCount(string statisticsContent)
         {

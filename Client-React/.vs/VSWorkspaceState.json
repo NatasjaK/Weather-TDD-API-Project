@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\weather-react"
+    "\\weather-react",
+    "\\weather-react\\public",
+    "\\weather-react\\src",
+    "\\weather-react\\src\\assets",
+    "\\weather-react\\src\\components"
   ],
-  "SelectedNode": "\\weather-react\\index.html",
+  "SelectedNode": "\\weather-react\\src\\App.jsx",
   "PreviewInSolutionExplorer": false
 }

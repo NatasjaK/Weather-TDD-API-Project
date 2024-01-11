@@ -2,7 +2,12 @@ namespace Weather_TDD_API
 {
     public class Program
     {
-        private static int _apiCallCount = 0;
+        private static readonly HttpClient _httpClient = new HttpClient();
+        public static int _apiCallCount = 0;
+        public static void ResetApiCallCount()
+        {
+            _apiCallCount = 0;
+        }
 
         public static void Main(string[] args)
         {
@@ -22,6 +27,8 @@ namespace Weather_TDD_API
                            .AllowAnyHeader();
                 });
             });
+
+            builder.Services.AddSingleton(_httpClient);
 
             var app = builder.Build();
 
@@ -45,8 +52,10 @@ namespace Weather_TDD_API
 
             app.MapGet("/statistics", async (HttpContext context) =>
             {
+                // Return the current API call count without incrementing it
                 await context.Response.WriteAsync($"Total API calls since start: {_apiCallCount}");
             });
+
 
             app.MapGet("/healthcheck", () =>
             {
@@ -73,8 +82,8 @@ namespace Weather_TDD_API
                 var baseURL = "https://api.openweathermap.org/data/2.5/weather";
                 var queryParams = $"?q={cityName}&appid={API_key}&units=metric"; // Requesting metric units for temperature
 
-                using var client = new HttpClient();
-                var response = client.GetAsync($"{baseURL}{queryParams}").Result;
+                
+                var response = _httpClient.GetAsync($"{baseURL}{queryParams}").Result;
                 Console.WriteLine(response);
                 var content = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(content);
