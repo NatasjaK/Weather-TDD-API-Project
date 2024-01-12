@@ -91,13 +91,16 @@ const WeatherContainer = styled.div`
 const WeatherComponent = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [cityName, setCityName] = useState('Stockholm');
+    const [inputCity, setInputCity] = useState(''); // New state for the input field
     const [errorMessage, setErrorMessage] = useState('');
 
     const fetchWeatherData = async () => {
         try {
-            let endpoint = `https://localhost:7186/weatherdata/${cityName}`;
+            let endpoint = `https://weather-tdd-api20240111214844.azurewebsites.net/weatherdata/${cityName}`;
+            /*let endpoint = `https://localhost:7186/weatherdata/${cityName}`;*/
             if (cityName === 'Stockholm') {
-                endpoint = 'https://localhost:7186/weatherdata';
+                endpoint = 'https://weather-tdd-api20240111214844.azurewebsites.net/weatherdata';
+                /*endpoint = 'https://localhost:7186/weatherdata';*/
             }
 
             const response = await axios.get(endpoint);
@@ -117,7 +120,7 @@ const WeatherComponent = () => {
     };
 
     const handleCityChange = (e) => {
-        setCityName(e.target.value); // Update the cityName state with the input value
+        setInputCity(e.target.value); // Update the inputCity state with the input value
     };
 
     const handleCitySelect = (selectedCity) => {
@@ -127,7 +130,8 @@ const WeatherComponent = () => {
     const handleSearch = async () => {
         try {
             await fetchWeatherData();
-            setCityName(''); // Clear the input field after fetching data
+            setCityName(inputCity); // Update the cityName state with the inputCity value
+            setInputCity(''); // Clear the input field after fetching data
         } catch (error) {
             console.error('Error fetching weather data:', error);
             setWeatherData(null);
@@ -158,7 +162,7 @@ const WeatherComponent = () => {
                 <input
                     type="text"
                     id="cityInput"
-                    value={cityName}
+                    value={inputCity}
                     onChange={handleCityChange}
                 />
                 <button onClick={handleSearch}>Search</button>

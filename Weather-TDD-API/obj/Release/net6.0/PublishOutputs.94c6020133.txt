@@ -1,0 +1,12 @@
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Weather-TDD-API.exe
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Weather-TDD-API.dll
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Weather-TDD-API.deps.json
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Weather-TDD-API.runtimeconfig.json
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Weather-TDD-API.pdb
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\natas\Documents\Chas\CSharp\Weather-TDD-API-Project\Weather-TDD-API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
